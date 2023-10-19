@@ -19,6 +19,7 @@ contract WLF is ERC1155, Ownable {
     string public prefix = ".json";
     string public name;
     string public symbol;
+    bool public pause = false;
 
     modifier isTokenIdsValid(uint256[] memory _ids) {
         for (uint256 i = 0; i < _ids.length; i++) {
@@ -32,6 +33,11 @@ contract WLF is ERC1155, Ownable {
 
     modifier isTokenIdValid(uint256 _id) {
         require(_id <= tokenSupply && _id > 0, "WLF: Token does not exist");
+        _;
+    }
+
+    modifier isNotPause() {
+        require(_pause, "WLF: The mint is paused");
         _;
     }
 
@@ -51,7 +57,7 @@ contract WLF is ERC1155, Ownable {
         uint256 _id,
         uint256 _amount,
         bytes memory _data
-    ) public payable isTokenIdValid(_id) {
+    ) public payable isTokenIdValid(_id) isNotPause {
         // Transfer funds
         _transferFunds(paymentReceiver, _amount);
 
@@ -64,7 +70,7 @@ contract WLF is ERC1155, Ownable {
         uint256[] memory _ids,
         uint256[] memory _amounts,
         bytes memory _data
-    ) public payable isTokenIdsValid(_ids) {
+    ) public payable isTokenIdsValid(_ids) isNotPause {
         require(
             _ids.length == _amounts.length,
             "WLF: Length of ids and amounts are must be same"
@@ -106,6 +112,10 @@ contract WLF is ERC1155, Ownable {
 
     function setPaymentReceiver(address _newReceiver) public onlyOwner {
         paymentReceiver = payable(_newReceiver);
+    }
+
+    function setPause() public onlyOwner {
+        pause = !pause;
     }
 
     function _transferFunds(
