@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prepare": "env-prompt -d .env.sample",
+    "prepare": "env-prompt -d .env.example",
     "lint": "solhint contracts/**/*.sol",
     "clean": "hardhat clean",
     "compile": "hardhat compile",
@@ -45,3 +45,4 @@
     "typescript": "^4.9.5"
   }
 }
+

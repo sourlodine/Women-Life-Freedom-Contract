@@ -19,7 +19,7 @@ contract WLF is ERC1155, Ownable {
     string public prefix = ".json";
     string public name;
     string public symbol;
-    bool public pause = false;
+    bool public pause = true;
 
     modifier isTokenIdsValid(uint256[] memory _ids) {
         for (uint256 i = 0; i < _ids.length; i++) {
@@ -37,7 +37,7 @@ contract WLF is ERC1155, Ownable {
     }
 
     modifier isNotPause() {
-        require(_pause, "WLF: The mint is paused");
+        require(!pause, "WLF: The mint is paused");
         _;
     }
 
@@ -127,7 +127,7 @@ contract WLF is ERC1155, Ownable {
         // Check price
         require(msg.value >= payableCost, "Invalid amount");
 
-        (bool sent, ) = recipient.call{value: cost}("");
+        (bool sent, ) = recipient.call{value: payableCost}("");
         require(sent, "Failed to transfer to receiver");
     }
 }
