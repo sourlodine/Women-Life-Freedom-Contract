@@ -1,0 +1,47 @@
+{
+  "name": "erc721-seadrop",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "prepare": "env-prompt -d .env.sample",
+    "lint": "solhint contracts/**/*.sol",
+    "clean": "hardhat clean",
+    "compile": "hardhat compile",
+    "deploy:goerli": "hardhat run ./scripts/deploy.ts --network goerli",
+    "test": "hardhat test",
+    "test:ci": "yarn run test:gas && yarn run test:coverage",
+    "test:gas": "REPORT_GAS=true concurrently --raw --kill-others --success first \"hardhat node\" \"yarn test:localhost\"",
+    "test:cov": "hardhat coverage --network coverage"
+  },
+  "keywords": [
+    "solidity",
+    "hardhat"
+  ],
+  "author": "Harry Anderson",
+  "license": "MIT",
+  "devDependencies": {
+    "@chainlink/contracts": "^0.8.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@openzeppelin/contracts-upgradeable": "^5.0.0",
+    "@typechain/ethers-v5": "^6.0.5",
+    "@types/chai": "^4.3.5",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.14.0",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "dotenv": "^16.3.1",
+    "env-prompt": "^2.0.3",
+    "hardhat": "^2.17.1",
+    "hardhat-deploy": "^0.11.34",
+    "hardhat-gas-reporter": "^1.0.9",
+    "hardhat-typechain": "^0.3.5",
+    "mocha": "^10.2.0",
+    "solhint": "^3.6.1",
+    "solidity-coverage": "^0.8.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}
