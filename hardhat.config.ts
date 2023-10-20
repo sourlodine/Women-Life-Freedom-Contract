@@ -37,6 +37,11 @@ const config: HardhatUserConfig = {
       live: true,
       loggingEnabled: true,
     },
+    main: {
+      url: `https://eth.meowrpc.com`,
+      // @ts-ignore
+      accounts: [process.env.PRIVATE_KEY],
+    },
     goerli: {
       url: `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
       // @ts-ignore
