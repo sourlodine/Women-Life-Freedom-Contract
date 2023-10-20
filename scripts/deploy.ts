@@ -4,7 +4,7 @@ import "@nomiclabs/hardhat-etherscan";
 // Function to deploy NFT implementation contract
 const deployContract = async () => {
   const contractFactory = await ethers.getContractFactory("WLF");
-  const name = "Women Life Freedom";
+  const name = "Woman Lif3 Fr33dom";
   const symbol = "WLF";
   const url =
     "https://green-above-salamander-24.mypinata.cloud/ipfs/Qmd9NUfeP9dzxX3GxgzaJ9VdhaSHwMaf5AJkaDWNN6GLtu/";
